@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
 import { Flavor } from './flavor';
-import { FlavorManager } from './flavor-manager';
-
-let flavorManager : FlavorManager = new FlavorManager;
-flavorManager.populateFlavors();
 
 @Component({
   selector: 'app-root',
   template: `
     <div class="container">
      <h1>FroLo's Yogurt Shoppe</h1>
-     <display-flavors [childFlavorList] = "masterFlavorList"></display-flavors>
+     <display-flavors [childFlavorList] = "masterFlavorList" (editSender)="editFlavor($event)"></display-flavors>
 
      <br>
      <hr>
-     <flavor-details></flavor-details>
+     <edit-details [childSelectedFlavor]="selectedFlavor" (doneButtonClickedSender)="finishedEditing()"></edit-details>
     </div>
 
     <add-flavor></add-flavor>
@@ -23,7 +19,7 @@ flavorManager.populateFlavors();
 
 
 export class AppComponent {
-  // selectedFlavor: Flavor;
+  selectedFlavor = null;
 
   masterFlavorList: Flavor[] = [
     new Flavor('Kim\'s Delight', 'Schulze Co.', 3, 'strawberry & chocolate', true, true),
@@ -34,11 +30,13 @@ export class AppComponent {
     new Flavor('Yum Gum', 'Gelatin Suprise', 5, 'cotton candy flavor, vanilla', true, true)
   ];
 
-  // showDetails(flavor:Flavor): void {
-  //   this.selectedFlavor = flavor;
-  // }
+  editFlavor(clickedFlavor) {
+    this.selectedFlavor = clickedFlavor;
+  }
 
-  
+  finishedEditing() {
+    this.selectedFlavor = null;
+  }
 
   // addFlavor(name, brand, price, description, kosher, vegan) {
   //   if (kosher==="true"){kosher=true}else{kosher=false};

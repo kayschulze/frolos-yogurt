@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Flavor } from './flavor';
 
 
@@ -14,6 +14,7 @@ import { Flavor } from './flavor';
        <p>Brand: {{flavor.brand}}</p>
        <p>Price: $\{{flavor.price}}</p>
        <p>Description: {{flavor.description}}</p>
+       <button (click)="editFlavorButton(flavor)">Edit</button>
     </li>
   </ul>
   `
@@ -21,6 +22,11 @@ import { Flavor } from './flavor';
 
 export class DisplayFlavorsComponent {
   @Input() childFlavorList: Flavor[];
+  @Output() editSender = new EventEmitter();
+
+  editFlavorButton(flavorToEdit: Flavor) {
+    this.editSender.emit(flavorToEdit);
+  }
 
   showKosher(flavor) {
     if (flavor.kosher === true) {
