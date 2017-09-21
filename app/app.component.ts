@@ -41,15 +41,22 @@ flavorManager.populateFlavors();
       <input type="text" class="form-control" #description placeholder="description" required>
 
       <label for="kosher">Kosher</label>
-      <input type="checkbox" #kosher name="kosher" value=true>
+      <select #isKosher>
+        <option [value]="true">Yes</option>
+        <option [value]="false">No</option>
+      </select>
 
       <label for="vegan">Vegan</label>
-      <input type="checkbox" #vegan name="vegan" value=true>
+      <select #isVegan>
+        <option [value]="true">Yes</option>
+        <option [value]="false">No</option>
+      </select>
 
-      <button (click)="addFlavor(name.value, brand.value, price.value, description.value, kosher.value, vegan.value)">Add Flavor</button>
+      <button (click)="addFlavor(name.value, brand.value, price.value, description.value, isKosher.value, isVegan.value)">Add Flavor</button>
     </div>
   `
 })
+
 
 
 export class AppComponent {
@@ -60,25 +67,25 @@ export class AppComponent {
     this.selectedFlavor = flavor;
   }
 
-  // assignKosher() {
-  //   if()
-  // }
+  showKosher(flavor) {
+    console.log(flavor.name, flavor.kosher);
+    if (flavor.kosher === true) {
+      return "http://failedmessiah.typepad.com/.a/6a00d83451b71f69e20133ed3f51f4970b-600wi";
+    } else {
+      return "http://clipart-library.com/images/8cxKBeG9i.png";
+    }
+  }
 
-  // showKosher(flavor) {
-  //   if (flavor.kosher === true) {
-  //     return "http://failedmessiah.typepad.com/.a/6a00d83451b71f69e20133ed3f51f4970b-600wi";
-  //   }
-  // }
+  showVegan(flavor) {
+    console.log(flavor.vegan);
+    if (flavor.vegan === true) {
+      return "https://i.pinimg.com/736x/7c/57/7e/7c577e9a7dc7599838b316a0b5fb6651--vegan-symbol-vegan-tattoo.jpg";
+    } else {
+      return "http://alipmandesign.com/wp-content/uploads/2015/07/cow-v3.png";
+    }
+  }
 
-  // showVegan(flavor) {
-  //   if (flavor.vegan === true) {
-  //     return "https://i.pinimg.com/736x/7c/57/7e/7c577e9a7dc7599838b316a0b5fb6651--vegan-symbol-vegan-tattoo.jpg";
-  //   }
-  // }
-
-  addFlavor(name, brand, price, description) {
-    //newFlavor:Flavor = new Flavor(name, brand, price, description);
-    // this.flavorManager.addOneFlavor(new Flavor(name, brand, price, description));
-    this.allFlavors.push(new Flavor(name, brand, price, description));
+  addFlavor(name, brand, price, description, kosher, vegan) {
+    this.allFlavors.push(new Flavor(name, brand, price, description, kosher, vegan));
   }
 }

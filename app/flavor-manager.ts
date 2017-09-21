@@ -11,8 +11,9 @@ export class FlavorManager{
     let flavor3:Flavor = new Flavor('KaiBerry', 'Hiro Unlimited', 4, 'strawberry & banana & blueberry', true, false);
     let flavor4:Flavor = new Flavor('RoboBerry', 'Robert Incorporated', 3, 'blackberry & raspberry', false, false);
     let flavor5:Flavor = new Flavor('Marsh Mudd', 'Gelatin Suprise', 7, 'marshmallow, chocolate, peanuts, and caramal sauce', false, false);
+    let flavor6:Flavor = new Flavor('Yum Gum', 'Gelatin Suprise', 5, 'cotton candy flavor, vanilla', true, true);
 
-    this.allFlavors.push(flavor1, flavor2, flavor3, flavor4, flavor5);
+    this.allFlavors.push(flavor1, flavor2, flavor3, flavor4, flavor5, flavor6);
   }
 
   addOneFlavor(newFlavor) {
