@@ -20,10 +20,6 @@ export class EditDetailsComponent{
   @Input() childSelectedFlavor: Flavor;
   @Output() doneButtonClickedSender = new EventEmitter();
 
-  hide(): void {
-    this.flavor = null;
-  }
-
   doneButtonClicked() {
     this.doneButtonClickedSender.emit();
   }

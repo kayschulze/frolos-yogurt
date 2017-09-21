@@ -24,6 +24,7 @@ import { Flavor } from './flavor';
       <option [value]="false">No</option>
     </select>
 
+    <label for="vegan">Vegan</label>
     <select #isVegan>
       <option [value]="true">Yes</option>
       <option [value]="false">No</option>
@@ -35,6 +36,12 @@ import { Flavor } from './flavor';
 })
 
 export class AddFlavorComponent {
+  @Output() newFlavorSender = new EventEmitter();
 
-
+  addFlavor(name: string, brand: string, price: number, description: string, kosher: boolean, vegan: boolean) {
+    if (kosher==="true"){kosher=true}else{kosher=false};
+    if (vegan==="true"){vegan=true}else{vegan=false};
+    var newFlavorToAdd: Flavor = new Flavor(name, brand, price, description, kosher, vegan);
+    this.newFlavorSender.emit(newFlavorToAdd);
+  }
 }

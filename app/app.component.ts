@@ -13,7 +13,7 @@ import { Flavor } from './flavor';
      <edit-details [childSelectedFlavor]="selectedFlavor" (doneButtonClickedSender)="finishedEditing()"></edit-details>
     </div>
 
-    <add-flavor></add-flavor>
+    <add-flavor (newFlavorSender)="addFlavor($event)"></add-flavor>
   `
 })
 
@@ -38,10 +38,7 @@ export class AppComponent {
     this.selectedFlavor = null;
   }
 
-  // addFlavor(name, brand, price, description, kosher, vegan) {
-  //   if (kosher==="true"){kosher=true}else{kosher=false};
-  //   if (vegan==="true"){vegan=true}else{vegan=false};
-  //   let newFlavor = new Flavor(name, brand, price, description, kosher, vegan);
-  //   this.allFlavors.push(newFlavor);
-  // }
+  addFlavor(newFlavorFromChild: Flavor) {
+    this.masterFlavorList.push(newFlavorFromChild);
+  }
 }

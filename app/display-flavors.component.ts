@@ -5,8 +5,15 @@ import { Flavor } from './flavor';
 @Component({
   selector: 'display-flavors',
   template: `
+  <select (change)="onChange($event.target.value)">
+    <option value="everything" selcted="selected">Show All</option>
+    <option value="isKosherAndVegan">Kosher and Vegan</option>
+    <option value="isKosher">Kosher</option>
+    <option value="isVegan">Vegan</option>
+  </select>
+
   <ul>
-    <li *ngFor="let flavor of childFlavorList">
+    <li *ngFor="let flavor of childFlavorList | filterness:filterByFilterness">
        <h3>{{flavor.name}}
          <img [src]="showKosher(flavor)">
          <img [src]="showVegan(flavor)">
@@ -23,6 +30,12 @@ import { Flavor } from './flavor';
 export class DisplayFlavorsComponent {
   @Input() childFlavorList: Flavor[];
   @Output() editSender = new EventEmitter();
+
+  filterByFilterness: string = "everything";
+
+  onChange(optionFromMenu) {
+    this.filterByFilterness = optionFromMenu;
+  }
 
   editFlavorButton(flavorToEdit: Flavor) {
     this.editSender.emit(flavorToEdit);
